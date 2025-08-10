@@ -1,1 +1,90 @@
-﻿
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{Title}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #28a745;
+            padding-bottom: 20px;
+        }
+
+            .report-header h1 {
+                color: #28a745;
+                margin: 0;
+                font-size: 2.5em;
+            }
+
+        .report-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #28a745;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    {{> header}}
+
+    <div class="report-header">
+        <h1>{{Title}}</h1>
+        <p>Generated on {{GeneratedDate}}</p>
+    </div>
+
+    <div class="report-stats">
+        <div class="stat-card">
+            <div class="stat-value">{{TotalInvoices}}</div>
+            <div class="stat-label">Total Invoices</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">${{TotalRevenue}}</div>
+            <div class="stat-label">Total Revenue</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{TopCustomer}}</div>
+            <div class="stat-label">Top Customer</div>
+        </div>
+    </div>
+
+    <div class="report-content">
+        <h2>Summary</h2>
+        <p>This month has shown strong performance with {{TotalInvoices}} invoices processed and total revenue of ${{TotalRevenue}}. Our top performing customer was {{TopCustomer}}.</p>
+
+        <h2>Key Metrics</h2>
+        <ul>
+            <li>Average invoice value: ${{TotalRevenue}}/{{TotalInvoices}} = $1,830</li>
+            <li>Month-over-month growth: +15%</li>
+            <li>Customer satisfaction: 98%</li>
+        </ul>
+    </div>
+
+    {{> footer}}
+</body>
+</html>

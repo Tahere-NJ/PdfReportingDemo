@@ -1,1 +1,154 @@
-﻿
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Invoice {{InvoiceNumber}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 20px;
+        }
+
+        .company-info h1 {
+            color: #007bff;
+            margin: 0;
+        }
+
+        .invoice-details {
+            text-align: right;
+        }
+
+        .customer-info {
+            margin-bottom: 30px;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+            .items-table th,
+            .items-table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .items-table th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+            }
+
+            .items-table .number {
+                text-align: right;
+            }
+
+        .totals {
+            float: right;
+            width: 300px;
+        }
+
+            .totals table {
+                width: 100%;
+            }
+
+            .totals td {
+                padding: 8px 0;
+                border-bottom: 1px solid #eee;
+            }
+
+            .totals .total-row {
+                font-weight: bold;
+                font-size: 1.1em;
+                border-top: 2px solid #333;
+            }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    {{> header}}
+
+    <div class="invoice-header">
+        <div class="company-info">
+            <h1>Your Company Name</h1>
+            <p>
+                123 Business St<br>
+                City, State 12345<br>
+                Phone: (555) 123-4567
+            </p>
+        </div>
+        <div class="invoice-details">
+            <h2>INVOICE</h2>
+            <p><strong>Invoice #:</strong> {{InvoiceNumber}}</p>
+            <p><strong>Date:</strong> {{formatDate InvoiceDate}}</p>
+            <p><strong>Due Date:</strong> {{formatDate DueDate}}</p>
+        </div>
+    </div>
+
+    <div class="customer-info">
+        <h3>Bill To:</h3>
+        <p>
+            {{CustomerName}}<br>
+            {{{CustomerAddress}}}
+        </p>
+    </div>
+
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th class="number">Quantity</th>
+                <th class="number">Unit Price</th>
+                <th class="number">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each Items}}
+            <tr>
+                <td>{{Description}}</td>
+                <td class="number">{{Quantity}}</td>
+                <td class="number">{{currency UnitPrice}}</td>
+                <td class="number">{{currency Total}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div class="clearfix">
+        <div class="totals">
+            <table>
+                <tr>
+                    <td>Subtotal:</td>
+                    <td class="number">{{currency Subtotal}}</td>
+                </tr>
+                <tr>
+                    <td>Tax (8%):</td>
+                    <td class="number">{{currency TaxAmount}}</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Total:</td>
+                    <td class="number">{{currency Total}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    {{> footer}}
+</body>
+</html>

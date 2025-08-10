@@ -10,7 +10,17 @@
   <ItemGroup>
     <PackageReference Include="Handlebars.Net" Version="2.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
-    <PackageReference Include="PuppeteerSharp" Version="19.0.2" />
+    <PackageReference Include="PuppeteerSharp" Version="20.2.2" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Templates\Partials\" />
+  </ItemGroup>
+	  
+  <ItemGroup>
+    <None Update="Templates\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
